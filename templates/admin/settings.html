@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    body {
+      margin: 0;
+    }
+    .main-content {
+      margin-left: 220px;
+      padding: 1rem;
+    }
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+      }
+    }
+    .sidebar-lg {
+      width: 220px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <div class="container-fluid">
+    <button class="btn btn-outline-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#adminSidebar">
+      ☰
+    </button>
+      <a class="navbar-brand fw-bold ms-2" href="/admin">🚑 Admin Panel</a>
+      <span class="navbar-text text-white ms-auto">Settings</span>
+    </div>
+  </nav>
+
+  <!-- Sidebar for large screens -->
+  <div class="d-none d-lg-block position-fixed h-100 bg-dark text-white sidebar-lg">
+    <div class="p-3">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link text-white" href="/admin">🏠 Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="/bookings">📋 Bookings</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="/queries">❓ Queries</a></li>
+        <li class="nav-item"><a class="nav-link text-white active" href="/settings">⚙️ Settings</a></li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <!-- Offcanvas Sidebar for mobile -->
+  <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="adminSidebar">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">🚑 Admin Panel</h5>
+      <button type="button" class="btn-close text-reset bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body p-0">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link text-white" href="index.html">🏠 Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="bookings.html">📋 Bookings</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="queries.html">❓ Queries</a></li>
+        <li class="nav-item"><a class="nav-link text-white active" href="settings.html">⚙️ Settings</a></li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <!-- Settings Content -->
+  <div class="main-content">
+    <div class="container py-5">
+      <h2 class="mb-4 text-center fw-bold">⚙️ Application Settings</h2>
+
+     <!-- Admin Info -->
+<!-- Admin Info -->
+<div class="card mb-4">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span>👤 Admin Profile</span>
+    <button type="button" class="btn btn-sm btn-outline-primary" id="editAdminBtn">
+      <i class="bi bi-pencil"></i> Edit
+    </button>
+  </div>
+  <div class="card-body">
+    <form class="row g-3" id="adminProfileForm">
+      <div class="col-md-6">
+        <label for="adminEmail" class="form-label">Registered Email</label>
+        <input type="email" id="adminEmail" class="form-control" value="admin@saranambulance.in" disabled>
+      </div>
+      <div class="col-md-6">
+        <label for="adminPhone" class="form-label">Contact Number</label>
+        <input type="tel" id="adminPhone" class="form-control" value="+91 80082 80020" disabled>
+      </div>
+      <div class="col-md-12">
+        <label for="adminAddress" class="form-label">Registered Address</label>
+        <input type="text" id="adminAddress" class="form-control" value="Saran, Bihar" disabled>
+      </div>
+      <div class="col-12 text-end" id="saveChangesBtn" style="display: none;">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add this script at the end of the page -->
+<script>
+  const editBtn = document.getElementById("editAdminBtn");
+  const saveBtnDiv = document.getElementById("saveChangesBtn");
+  const adminForm = document.getElementById("adminProfileForm");
+
+  editBtn.addEventListener("click", () => {
+    const fields = adminForm.querySelectorAll("input");
+    fields.forEach(field => field.disabled = !field.disabled);
+    saveBtnDiv.style.display = fields[0].disabled ? "none" : "block";
+    editBtn.innerHTML = fields[0].disabled 
+      ? '<i class="bi bi-pencil"></i> Edit'
+      : '<i class="bi bi-x"></i> Cancel';
+  });
+</script>
+
+      <!-- Notifications -->
+      <div class="card mb-4">
+        <div class="card-header">🔔 Notifications</div>
+        <div class="card-body">
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="emailNotify" checked>
+            <label class="form-check-label" for="emailNotify">Enable Email Alerts</label>
+          </div>
+          <div class="form-check form-switch mt-2">
+            <input class="form-check-input" type="checkbox" id="smsNotify">
+            <label class="form-check-label" for="smsNotify">Enable SMS Alerts</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
